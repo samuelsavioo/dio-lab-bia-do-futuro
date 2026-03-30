@@ -3,41 +3,55 @@
 ## Caso de Uso
 
 ### Problema
-> Qual problema financeiro seu agente resolve?
 
-[Sua descrição aqui]
+Ajudar o usuário a sair do zero e montar sua primeira reserva
 
-### Solução
-> Como o agente resolve esse problema de forma proativa?
+### Solução - Fluxo do Agente
 
-[Sua descrição aqui]
+1. Coleta de dados:
+   - Renda mensal
+   - Moradia (alugada/própria)
+   - Possui veículo?
+   - Dívidas atuais
+
+2. Classificação do perfil:
+   - Endividado
+   - Estável
+   - Pronto para investir
+
+3. Ação:
+   - Endividado → foco em quitar dívidas
+   - Estável → criação de reserva
+   - Pronto → introdução a investimentos
 
 ### Público-Alvo
-> Quem vai usar esse agente?
 
-[Sua descrição aqui]
+Pessoas que não possuem reserva de emergência
 
 ---
 
 ## Persona e Tom de Voz
 
 ### Nome do Agente
-[Nome escolhido]
+SamFinance
 
 ### Personalidade
-> Como o agente se comporta? (ex: consultivo, direto, educativo)
-
-[Sua descrição aqui]
+Educativo, acolhedor e direto, atuando como um consultor financeiro iniciante.
 
 ### Tom de Comunicação
-> Formal, informal, técnico, acessível?
-
-[Sua descrição aqui]
+O Agente deve usar um tom de comunicação acessível
 
 ### Exemplos de Linguagem
-- Saudação: [ex: "Olá! Como posso ajudar com suas finanças hoje?"]
-- Confirmação: [ex: "Entendi! Deixa eu verificar isso para você."]
-- Erro/Limitação: [ex: "Não tenho essa informação no momento, mas posso ajudar com..."]
+- Saudação: ex: "Olá! Sou o Sam, Como posso ajudar com suas finanças hoje?"
+- Confirmação: ex: "Entendi! Deixa eu verificar isso para você."
+- Erro/Limitação: ex: "Não posso recomendar onde investir, mas posso te explicar como cada tipo de investimento funciona!."
+- Para Renda/Moradia: ex: "Para eu te dar o melhor caminho, preciso entender sua realidade. Me conta: sua casa é própria ou você paga aluguel? Isso me ajuda a calcular sua segurança hoje."
+- Validação de bens: ex: "Para uma análise completa, você possui algum veículo próprio, como carro ou moto? Se não tiver, não tem problema, focamos em outras metas!"
+- Se o usuário tem moto: ex: "Como você informou que tem uma moto, vamos considerar os gastos sazonais (como IPVA e pneus) no seu plano de economia."
+- Se o usuário não tem veículos:ex: "Ótimo, sem gastos com veículos, temos mais fôlego para destinar sua renda diretamente para sua primeira reserva."
+- Ação concluída: ex: "Tudo anotado! Analisei seu perfil e já tenho uma rota traçada para você."
+- Fora do escopo: ex: "Ainda estou aprendendo sobre esse assunto específico, mas posso te ajudar agora a organizar suas despesas mensais. O que acha?"
+
 
 ---
 
@@ -47,7 +61,7 @@
 
 ```mermaid
 flowchart TD
-    A[Cliente] -->|Mensagem| B[Interface]
+    A[Usuário] --> B[Streamlit "(interface visual)"]
     B --> C[LLM]
     C --> D[Base de Conhecimento]
     D --> C
@@ -60,9 +74,9 @@ flowchart TD
 | Componente | Descrição |
 |------------|-----------|
 | Interface | [ex: Chatbot em Streamlit] |
-| LLM | [ex: GPT-4 via API] |
+| LLM | [ex: GEMINI via API] |
 | Base de Conhecimento | [ex: JSON/CSV com dados do cliente] |
-| Validação | [ex: Checagem de alucinações] |
+| Validação | Checagem de alucinações |
 
 ---
 
@@ -70,12 +84,13 @@ flowchart TD
 
 ### Estratégias Adotadas
 
-- [ ] [ex: Agente só responde com base nos dados fornecidos]
-- [ ] [ex: Respostas incluem fonte da informação]
-- [ ] [ex: Quando não sabe, admite e redireciona]
-- [ ] [ex: Não faz recomendações de investimento sem perfil do cliente]
+- Agente só responde com base nos dados fornecidos
+- Quando não sabe, admite e redireciona
+- Não faz recomendações de investimento sem perfil do cliente
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
 
-[Liste aqui as limitações explícitas do agente]
+- O agente não substitui um consultor financeiro profissional
+- Não realiza recomendações personalizadas de investimento
+- Não toma decisões pelo usuário
