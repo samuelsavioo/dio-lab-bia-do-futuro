@@ -61,7 +61,7 @@ O Agente deve usar um tom de comunicação acessível
 
 ```mermaid
 flowchart TD
-    A[Usuário] --> B[Streamlit "(interface visual)"]
+    A[Usuário] --> B[Streamlit]
     B --> C[LLM]
     C --> D[Base de Conhecimento]
     D --> C
