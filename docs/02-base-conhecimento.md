@@ -4,52 +4,60 @@
 
 Descreva se usou os arquivos da pasta `data`, por exemplo:
 
-| Arquivo | Formato | Utilização no Agente |
+| Arquivo | Formato | Para que serve o Sam? |
 |---------|---------|---------------------|
-| `historico_atendimento.csv` | CSV | Contextualizar interações anteriores |
-| `perfil_investidor.json` | JSON | Personalizar recomendações |
-| `produtos_financeiros.json` | JSON | Sugerir produtos adequados ao perfil |
-| `transacoes.csv` | CSV | Analisar padrão de gastos do cliente |
+| `dados_usuario.json` | JSON | Armazenar as informações fornecidas pelo usuário no formulário |
+| `regras_classificacao.json` | JSON | Definir critérios para classificar o perfil financeiro do usuário |
 
-> [!TIP]
-> **Quer um dataset mais robusto?** Você pode utilizar datasets públicos do [Hugging Face](https://huggingface.co/datasets) relacionados a finanças, desde que sejam adequados ao contexto do desafio.
+
 
 ---
 
 ## Adaptações nos Dados
 
-> Você modificou ou expandiu os dados mockados? Descreva aqui.
+Os dados foram adaptados para refletir a realidade de usuários sem organização financeira prévia.
 
-[Sua descrição aqui]
+Foi criado um modelo simplificado de dados contendo:
+- Renda mensal
+- Gastos fixos e variáveis
+- Dívidas
+- Informações sobre moradia e bens
+
+Além disso, foi estruturado um modelo de classificação baseado nesses dados para permitir a análise do perfil financeiro do usuário.
 
 ---
 
 ## Estratégia de Integração
 
 ### Como os dados são carregados?
-> Descreva como seu agente acessa a base de conhecimento.
+Os dados são coletados dinamicamente a partir de um formulário na interface (Streamlit) e convertidos em um objeto JSON durante a execução da aplicação.
 
-[ex: Os JSON/CSV são carregados no início da sessão e incluídos no contexto do prompt]
+Não há carregamento inicial de base fixa, pois os dados são fornecidos pelo próprio usuário em tempo real.
 
 ### Como os dados são usados no prompt?
-> Os dados vão no system prompt? São consultados dinamicamente?
+Os dados do usuário são utilizados principalmente na lógica de negócio da aplicação para classificar o perfil financeiro.
 
-[Sua descrição aqui]
+Após a classificação, essas informações podem ser incluídas no contexto do prompt enviado ao modelo de linguagem, permitindo que o agente gere respostas personalizadas e contextualizadas.
+
+A decisão principal (classificação do perfil) não é feita pelo modelo de linguagem, mas sim por regras determinísticas definidas no sistema.
 
 ---
 
 ## Exemplo de Contexto Montado
 
-> Mostre um exemplo de como os dados são formatados para o agente.
-
 ```
-Dados do Cliente:
-- Nome: João Silva
-- Perfil: Moderado
-- Saldo disponível: R$ 5.000
+Dados do Usuário:
+- Renda mensal: R$ 2.000
+- Gastos fixos: R$ 1.200
+- Gastos variáveis: R$ 500
+- Dívidas: R$ 3.000
+- Possui veículo: Sim
+- Moradia: Alugada
 
-Últimas transações:
-- 01/11: Supermercado - R$ 450
-- 03/11: Streaming - R$ 55
+Classificação do Perfil:
+- Endividado
+
+Ação sugerida:
+- Foco na quitação de dívidas e controle de gastos
 ...
 ```
